@@ -19,12 +19,12 @@ class ToDo {
 
 function addTodo(todoData) {
   const newTodo = new ToDo(todoData);
-  db.push(newTodo);
+  db[todoData.group].push(newTodo);
 }
 
-function removeTodo(idToRemove) {
-  const index = db.findIndex((todo) => todo.id === idToRemove);
-  if (index !== -1) db.splice(index, 1);
+function removeTodo(groupName, idToRemove) {
+  const index = db[groupName].findIndex((todo) => todo.id === idToRemove);
+  if (index !== -1) db[groupName].splice(index, 1);
 }
 
 export { addTodo, removeTodo };
