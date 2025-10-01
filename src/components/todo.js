@@ -29,4 +29,20 @@ function deleteTodo(targetTodoId, targetGroupId) {
   targetGroup.removeItem(targetTodoId);
 }
 
-export { newTodo, deleteTodo };
+function getGroupTodos(targetGroupId) {
+  const targetGroup = db.find((group) => group.id === targetGroupId);
+  return targetGroup.items.map((group) => ({
+    title: group.title,
+    dueDate: group.dueDate,
+  }));
+}
+
+function getAllTodos() {
+  let allGroups = db.map((group) => group.items).flat();
+  return allGroups.map((group) => ({
+    title: group.title,
+    dueDate: group.dueDate,
+  }));
+}
+
+export { newTodo, deleteTodo, getGroupTodos, getAllTodos };

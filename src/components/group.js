@@ -31,4 +31,8 @@ function deleteGroup(targetGroupId) {
   db.splice(targetGroupIndex, 1);
 }
 
-export { newGroup, deleteGroup };
+function getGroupNames() {
+  db.map((group) => group.name);
+}
+
+export { newGroup, deleteGroup, getGroupNames };
