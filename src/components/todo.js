@@ -3,13 +3,12 @@ import db from "./db.js";
 class ToDo {
   #id = crypto.randomUUID();
 
-  constructor({ title, desc, dueDate, priority, status, group }) {
+  constructor({ title, desc, dueDate, priority, status }) {
     this.title = title;
     this.desc = desc;
     this.dueDate = dueDate;
     this.priority = priority;
     this.status = status;
-    this.group = group;
   }
 
   get id() {
@@ -17,14 +16,17 @@ class ToDo {
   }
 }
 
-function addTodo(todoData) {
-  const newTodo = new ToDo(todoData);
-  db[todoData.group].push(newTodo);
+function newTodo(todoData, targetGroupId) {
+  const todo = new ToDo(todoData);
+  const targetGroup = db.find((group) => group.id === targetGroupId);
+  if (!targetGroup) return;
+  targetGroup.addItem(todo);
 }
 
-function removeTodo(groupName, idToRemove) {
-  const index = db[groupName].findIndex((todo) => todo.id === idToRemove);
-  if (index !== -1) db[groupName].splice(index, 1);
+function deleteTodo(targetTodoId, targetGroupId) {
+  const targetGroup = db.find((group) => group.id === targetGroupId);
+  if (!targetGroup) return;
+  targetGroup.removeItem(targetTodoId);
 }
 
-export { addTodo, removeTodo };
+export { newTodo, deleteTodo };

@@ -1,5 +1,6 @@
 import db from "./components/db.js";
-import { addTodo, removeTodo } from "./components/todo.js";
+import { newGroup, deleteGroup } from "./components/group.js";
+import { newTodo, deleteTodo } from "./components/todo.js";
 
 // TEST SECTION ####################
 const sampleTodo1 = {
@@ -8,7 +9,6 @@ const sampleTodo1 = {
   dueDate: "2025-10-05",
   priority: "High",
   status: false,
-  group: "t",
 };
 
 const sampleTodo2 = {
@@ -17,12 +17,16 @@ const sampleTodo2 = {
   dueDate: "2023-10-05",
   priority: "Low",
   status: true,
-  group: "d",
 };
 
-addTodo(sampleTodo1);
-addTodo(sampleTodo2);
+// newTodo(sampleTodo1, "222222");
+// newTodo(sampleTodo2, "333333");
 
-// removeTodo(sampleTodo1.group, db.t[0].id);
+newGroup("new foo");
+newGroup("new bar");
+// deleteGroup(db[0].id);
+
+// newTodo(sampleTodo1, "123");
+// deleteTodo(db[0].items[0].id, "123");
 
 console.log(db);
