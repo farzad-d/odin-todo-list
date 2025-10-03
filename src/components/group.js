@@ -2,6 +2,7 @@ import db from "./db.js";
 
 class Group {
   #id = crypto.randomUUID();
+
   #items = [];
   constructor(name) {
     this.name = name;
@@ -13,6 +14,7 @@ class Group {
   get items() {
     return [...this.#items];
   }
+
   addItem(item) {
     this.#items.push(item);
   }

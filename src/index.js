@@ -1,3 +1,5 @@
+import "normalize.css";
+import "./styles.css";
 import db from "./components/db.js";
 import { newGroup, deleteGroup, getGroupNames } from "./components/group.js";
 import {
@@ -24,15 +26,15 @@ const sampleTodo2 = {
   status: true,
 };
 
-newGroup("new foo");
-newGroup("new bar");
+// newGroup("new foo");
+// newGroup("new bar");
 // deleteGroup(db[0].id);
 
-newTodo(sampleTodo1, db[0].id);
-newTodo(sampleTodo1, db[1].id);
+// newTodo(sampleTodo1, db[0].id);
+// newTodo(sampleTodo1, db[1].id);
 // deleteTodo(db[0].items[0].id, "123");
 
-console.log(db);
-console.log(getGroupNames());
-console.log(getGroupTodos(db[0].id));
-console.log(getAllTodos());
+// console.log(db);
+// console.log(getGroupNames());
+// console.log(getGroupTodos(db[0].id));
+// console.log(getAllTodos());
