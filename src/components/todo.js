@@ -29,11 +29,16 @@ function deleteTodo(targetTodoId, targetGroupId) {
   targetGroup.removeItem(targetTodoId);
 }
 
+function truncate(str, maxLength) {
+  return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
+}
+
 function getGroupTodos(targetGroupId) {
   const targetGroup = db.find((group) => group.id === targetGroupId);
   return targetGroup.items.map((group) => ({
     title: group.title,
     dueDate: group.dueDate,
+    desc: truncate(group.desc, 50),
   }));
 }
 
@@ -42,6 +47,7 @@ function getAllTodos() {
   return allGroups.map((group) => ({
     title: group.title,
     dueDate: group.dueDate,
+    desc: truncate(group.desc, 50),
   }));
 }
 

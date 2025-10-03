@@ -31,7 +31,7 @@ const sampleTodo2 = {
 // deleteGroup(db[0].id);
 
 // newTodo(sampleTodo1, db[0].id);
-// newTodo(sampleTodo1, db[1].id);
+// newTodo(sampleTodo2, db[1].id);
 // deleteTodo(db[0].items[0].id, "123");
 
 // console.log(db);
