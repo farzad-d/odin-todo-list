@@ -34,7 +34,7 @@ function deleteGroup(targetGroupId) {
 }
 
 function getGroupNames() {
-  db.map((group) => group.name);
+  return db.map((group) => group.name);
 }
 
 export { newGroup, deleteGroup, getGroupNames };

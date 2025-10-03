@@ -8,6 +8,7 @@ import {
   getGroupTodos,
   getAllTodos,
 } from "./components/todo.js";
+import renderGroupList from "./components/sidebarUI.js";
 
 // TEST SECTION ####################
 const sampleTodo1 = {
@@ -26,15 +27,17 @@ const sampleTodo2 = {
   status: true,
 };
 
-// newGroup("new foo");
-// newGroup("new bar");
+newGroup("group foo");
+newGroup("group bar");
 // deleteGroup(db[0].id);
 
-// newTodo(sampleTodo1, db[0].id);
-// newTodo(sampleTodo2, db[1].id);
+newTodo(sampleTodo1, db[0].id);
+newTodo(sampleTodo2, db[1].id);
 // deleteTodo(db[0].items[0].id, "123");
 
-// console.log(db);
-// console.log(getGroupNames());
+console.log(db);
+console.log(getGroupNames());
 // console.log(getGroupTodos(db[0].id));
 // console.log(getAllTodos());
+
+renderGroupList(getGroupNames());
