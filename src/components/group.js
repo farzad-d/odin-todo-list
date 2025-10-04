@@ -33,8 +33,12 @@ function deleteGroup(targetGroupId) {
   db.splice(targetGroupIndex, 1);
 }
 
+function truncate(str, maxLength) {
+  return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
+}
+
 function getGroupNames() {
-  return db.map((group) => group.name);
+  return db.map((group) => truncate(group.name, 20));
 }
 
 export { newGroup, deleteGroup, getGroupNames };

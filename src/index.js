@@ -29,6 +29,7 @@ const sampleTodo2 = {
 
 newGroup("group foo");
 newGroup("group bar");
+newGroup("group buz");
 // deleteGroup(db[0].id);
 
 newTodo(sampleTodo1, db[0].id);
