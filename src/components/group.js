@@ -38,7 +38,8 @@ function truncate(str, maxLength) {
 }
 
 function getGroupNames() {
-  return db.map((group) => truncate(group.name, 20));
+  // return db.map((group) => truncate(group.name, 18));
+  return db.map((group) => group.name);
 }
 
 export { newGroup, deleteGroup, getGroupNames };

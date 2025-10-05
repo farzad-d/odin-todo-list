@@ -1,3 +1,5 @@
+import { newGroup, getGroupNames } from "./group.js";
+
 const groupList = document.getElementById("group-list");
 
 function createGroupElement(groupName) {
@@ -26,4 +28,25 @@ function renderGroupList(groupNames) {
   });
 }
 
-export default renderGroupList;
+const newGroupDialog = document.getElementById("new-group-dialog");
+const newGroupForm = document.getElementById("new-group-form");
+
+newGroupForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(newGroupForm);
+  const name = formData.get("group-name");
+  newGroupForm.reset();
+  newGroupDialog.close();
+
+  newGroup(name);
+  renderGroupList(getGroupNames());
+});
+
+function handleSubmit() {
+  newGroupDialog.showModal();
+}
+
+const closeGroupDialogBtn = document.querySelector(".close-group-dialog-btn");
+closeGroupDialogBtn.addEventListener("click", () => newGroupDialog.close());
+
+export { renderGroupList, handleSubmit };
