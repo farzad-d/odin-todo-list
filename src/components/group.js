@@ -37,9 +37,11 @@ function truncate(str, maxLength) {
   return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
 }
 
-function getGroupNames() {
-  // return db.map((group) => truncate(group.name, 18));
-  return db.map((group) => group.name);
+function getGroupsInfo() {
+  return db.map((group) => ({
+    name: truncate(group.name, 18),
+    id: group.id,
+  }));
 }
 
-export { newGroup, deleteGroup, getGroupNames };
+export { newGroup, deleteGroup, getGroupsInfo };

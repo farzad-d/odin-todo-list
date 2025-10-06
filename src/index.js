@@ -1,7 +1,7 @@
 import "normalize.css";
 import "./styles.css";
 import db from "./components/db.js";
-import { newGroup, deleteGroup, getGroupNames } from "./components/group.js";
+import { newGroup, deleteGroup, getGroupsInfo } from "./components/group.js";
 import {
   newTodo,
   deleteTodo,
@@ -30,9 +30,9 @@ const sampleTodo2 = {
   status: true,
 };
 
-// newGroup("group foo");
-// newGroup("group bar");
-// newGroup("group buz");
+newGroup("group foo");
+newGroup("group bar");
+newGroup("group buz");
 // deleteGroup(db[0].id);
 
 // newTodo(sampleTodo1, db[0].id);
@@ -40,6 +40,8 @@ const sampleTodo2 = {
 // deleteTodo(db[0].items[0].id, "123");
 
 // console.log(db);
-// console.log(getGroupNames());
+// console.log(getGroupsInfo());
 // console.log(getGroupTodos(db[0].id));
 // console.log(getAllTodos());
+
+renderGroupList(getGroupsInfo());
