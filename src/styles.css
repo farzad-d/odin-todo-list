@@ -9,6 +9,10 @@ body {
   margin-bottom: 5px;
 }
 
+.new-group:active {
+  background-color: #8fa0ff;
+}
+
 .side-btn {
   border-radius: 10px;
   border: none;
@@ -21,10 +25,10 @@ body {
 }
 
 .side-btn:hover {
-  background-color: #a2b0ff;
+  background-color: #8fa0ff;
 }
 
-.side-btn:active {
+.selected-group {
   background-color: #8fa0ff;
 }
 
@@ -33,34 +37,41 @@ body {
   padding-left: 15px;
 }
 
+#all-todos {
+  margin-bottom: 10px;
+}
+
+.del-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+
 .group {
   position: relative;
   margin-bottom: 10px;
 }
 
 .delete-group-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
   top: 50%;
-  right: 3%;
-  background: transparent;
-  border: none;
+  right: 1%;
   transform: translateY(-50%);
 }
 
-.delete-group-icon {
+.delete-icon {
   width: 24px;
   height: 24px;
   fill: gray;
 }
 
-.delete-group-icon:hover {
+.delete-icon:hover {
   fill: red;
 }
 
-.delete-group-icon:active {
+.delete-icon:active {
   fill: darkred;
 }
 
@@ -69,16 +80,41 @@ body {
 }
 
 .todo-card {
-  border: 2px solid black;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background-color: lightgray;
+  padding: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#cards {
-  width: 75vw;
+.todo-card:hover {
+  box-shadow: 2px 2px 8px #000000;
+  transform: translate(-2px, -4px);
+}
+
+.delete-card-btn {
+  position: absolute;
+  top: 4%;
+  right: 1%;
+}
+
+.todo-title {
+  margin-bottom: 20px;
+}
+
+.todo-date,
+.todo.desc {
+  margin: 5px;
+}
+
+#cards-container {
+  width: 70vw;
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
   grid-auto-rows: 200px;
   gap: 18px;
-  justify-content: center;
 }
 
 ul {
@@ -89,23 +125,22 @@ ul {
 aside {
   display: flex;
   flex-direction: column;
-  background-color: #1b1a55;
-  width: 25vw;
+  background-color: #070f2b;
+  width: 30vw;
   align-items: center;
   padding: 0 25px 0 25px;
 }
 
 section {
-  background-color: #070f2b;
+  background-color: #1b1a55;
   text-align: center;
-  padding: 20px;
+  padding: 20px 40px 20px 40px;
 }
 
 h2 {
-  margin: 0 0 0 15px;
+  margin: 10px 0 40px 0;
   font-size: 2rem;
   color: lightgray;
-  padding-bottom: 40px;
 }
 
 #logo {
@@ -134,6 +169,7 @@ h1 {
   background-color: #c6ceff;
   border-radius: 10px;
   border: none;
+  height: 150px;
 }
 
 #new-group-dialog::backdrop {
@@ -176,9 +212,10 @@ h1 {
 
 #new-group-form label {
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
-#crete-group-btn {
+#create-group-btn {
   width: 160px;
   height: 38px;
   border: none;
@@ -188,10 +225,10 @@ h1 {
   color: white;
 }
 
-#crete-group-btn:hover {
+#create-group-btn:hover {
   background-color: #009700;
 }
 
-#crete-group-btn:active {
+#create-group-btn:active {
   background-color: #00a400;
 }

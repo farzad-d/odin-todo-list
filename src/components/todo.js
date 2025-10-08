@@ -2,6 +2,7 @@ import db from "./db.js";
 
 class ToDo {
   #id = crypto.randomUUID();
+  #groupId = "";
 
   constructor({ title, desc, dueDate, priority, status }) {
     this.title = title;
@@ -14,12 +15,21 @@ class ToDo {
   get id() {
     return this.#id;
   }
+
+  get groupId() {
+    return this.#groupId;
+  }
+
+  set groupId(gId) {
+    this.#groupId = gId;
+  }
 }
 
 function newTodo(todoData, targetGroupId) {
-  const todo = new ToDo(todoData);
   const targetGroup = db.find((group) => group.id === targetGroupId);
   if (!targetGroup) return;
+  const todo = new ToDo(todoData);
+  todo.groupId = targetGroupId;
   targetGroup.addItem(todo);
 }
 
@@ -29,26 +39,13 @@ function deleteTodo(targetTodoId, targetGroupId) {
   targetGroup.removeItem(targetTodoId);
 }
 
-function truncate(str, maxLength) {
-  return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
-}
-
 function getGroupTodos(targetGroupId) {
   const targetGroup = db.find((group) => group.id === targetGroupId);
-  return targetGroup.items.map((group) => ({
-    title: group.title,
-    dueDate: group.dueDate,
-    desc: truncate(group.desc, 50),
-  }));
+  return targetGroup.items;
 }
 
 function getAllTodos() {
-  let allGroups = db.map((group) => group.items).flat();
-  return allGroups.map((group) => ({
-    title: group.title,
-    dueDate: group.dueDate,
-    desc: truncate(group.desc, 50),
-  }));
+  return db.map((group) => group.items).flat();
 }
 
 export { newTodo, deleteTodo, getGroupTodos, getAllTodos };

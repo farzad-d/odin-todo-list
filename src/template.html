@@ -18,27 +18,15 @@
         <h1>ToDo Board</h1>
       </div>
       <button class="new-group side-btn">New Group</button>
-      <ul id="group-list"></ul>
+      <ul id="group-list">
+        <li id="all-todos">
+          <button class="side-btn list-btn">All ToDos</button>
+        </li>
+      </ul>
     </aside>
     <section>
       <h2>Group Title</h2>
-      <div id="cards">
-        <button class="todo-card">
-          <h3 class="todo-title">Buy groceries</h3>
-          <p class="todo-date">Due: Oct 5</p>
-          <p class="todo-desc">Milk, bread, and eggs...</p>
-        </button>
-        <button class="todo-card">
-          <h3 class="todo-title">Buy groceries</h3>
-          <p class="todo-date">Due: Oct 5</p>
-          <p class="todo-desc">Milk, bread, and eggs...</p>
-        </button>
-        <button class="todo-card">
-          <h3 class="todo-title">Buy groceries</h3>
-          <p class="todo-date">Due: Oct 5</p>
-          <p class="todo-desc">Milk, bread, and eggs...</p>
-        </button>
-      </div>
+      <div id="cards-container"></div>
     </section>
     <dialog id="new-group-dialog">
       <button class="close-group-dialog-btn close-dialog">✖</button>
@@ -47,7 +35,7 @@
           <label for="group-name">Group Name:</label>
           <input type="text" name="group-name" id="group-name" autofocus />
         </div>
-        <button id="crete-group-btn">Create Group</button>
+        <button id="create-group-btn">Create Group</button>
       </form>
     </dialog>
   </body>

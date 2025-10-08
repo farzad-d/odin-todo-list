@@ -33,15 +33,6 @@ function deleteGroup(targetGroupId) {
   db.splice(targetGroupIndex, 1);
 }
 
-function truncate(str, maxLength) {
-  return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
-}
+const getGroups = () => db;
 
-function getGroupsInfo() {
-  return db.map((group) => ({
-    name: truncate(group.name, 18),
-    id: group.id,
-  }));
-}
-
-export { newGroup, deleteGroup, getGroupsInfo };
+export { newGroup, deleteGroup, getGroups };

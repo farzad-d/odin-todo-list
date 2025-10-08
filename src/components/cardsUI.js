@@ -1,0 +1,42 @@
+const groupNameHeading = document.querySelector("h2");
+const cardsContainer = document.getElementById("cards-container");
+
+function createCardElement(todo) {
+  const todoCard = document.createElement("div");
+  todoCard.className = "todo-card";
+  todoCard.dataset.id = todo.id;
+  todoCard.dataset.groupId = todo.groupId;
+  cardsContainer.appendChild(todoCard);
+
+  const deleteCardBtnEl = document.createElement("button");
+  deleteCardBtnEl.classList.add("delete-card-btn", "del-btn");
+  deleteCardBtnEl.innerHTML = `<svg class="delete-icon"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24">
+  <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z"/></svg>`;
+  todoCard.appendChild(deleteCardBtnEl);
+
+  const cardTitle = document.createElement("h3");
+  cardTitle.className = "todo-title";
+  cardTitle.textContent = todo.title;
+  todoCard.appendChild(cardTitle);
+
+  const todoDate = document.createElement("p");
+  todoDate.className = "todo-date";
+  todoDate.textContent = todo.dueDate;
+  todoCard.appendChild(todoDate);
+
+  const todoDesc = document.createElement("p");
+  todoDesc.className = "todo-desc";
+  todoDesc.textContent =
+    todo.desc.length > 60 ? todo.desc.slice(0, 60) + "..." : todo.desc;
+  todoCard.appendChild(todoDesc);
+}
+
+function renderCards(todos) {
+  cardsContainer.replaceChildren();
+  todos.forEach((todo) => createCardElement(todo));
+}
+
+export default cardsContainer;
+export { renderCards };
