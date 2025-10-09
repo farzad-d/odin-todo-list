@@ -27,5 +27,12 @@ function renderGroupList(groupsInfo) {
   groupsInfo.forEach((group) => createGroupElement(group));
 }
 
+function highlightOnSelect(btnEl) {
+  if (!btnEl) return;
+  const listBtns = document.querySelectorAll(".list-btn");
+  listBtns.forEach((btn) => btn.classList.remove("selected-group"));
+  btnEl.classList.add("selected-group");
+}
+
 export default groupList;
-export { renderGroupList };
+export { renderGroupList, highlightOnSelect };

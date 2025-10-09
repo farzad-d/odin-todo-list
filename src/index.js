@@ -9,7 +9,10 @@ import {
   getGroupTodos,
   getAllTodos,
 } from "./components/todo.js";
-import groupList, { renderGroupList } from "./components/sidebarUI.js";
+import groupList, {
+  renderGroupList,
+  highlightOnSelect,
+} from "./components/sidebarUI.js";
 import cardsContainer, { renderCards } from "./components/cardsUI.js";
 
 const newGroupDialog = document.getElementById("new-group-dialog");
@@ -25,6 +28,7 @@ newGroupForm.addEventListener("submit", (e) => {
   newGroupDialog.close();
   newGroup(name);
   renderGroupList(getGroups());
+  groupList.lastChild.click();
 });
 
 const closeGroupDialogBtn = document.querySelector(".close-group-dialog-btn");
@@ -35,24 +39,25 @@ groupList.addEventListener("click", (e) => {
   const group = e.target.closest(".group");
   const allTodos = e.target.closest("#all-todos");
 
-  function highlightSelectedGroup() {
-    const listBtns = document.querySelectorAll(".list-btn");
-    listBtns.forEach((btn) => btn.classList.remove("selected-group"));
-    const selectedGroup = e.target.closest(".list-btn");
-    selectedGroup.classList.add("selected-group");
-  }
-
   if (deleteGroupBtn) {
     const groupToDelete = deleteGroupBtn.closest(".group");
+    const prevSibling = groupToDelete.previousElementSibling;
+    const prevId = prevSibling?.dataset?.id ?? null;
+
     deleteGroup(groupToDelete.dataset.id);
     renderGroupList(getGroups());
+
+    const buttonToSelect = prevId
+      ? document.querySelector(`[data-id="${prevId}"]`)
+      : document.querySelector("#all-todos");
+    buttonToSelect?.click();
   } else if (group) {
     renderCards(getGroupTodos(group.dataset.id));
-    highlightSelectedGroup();
+    highlightOnSelect(group.querySelector(".list-btn"));
     cardsContainer.dataset.displayType = "group";
   } else if (allTodos) {
-    renderCards(getAllTodos());
-    highlightSelectedGroup();
+    renderCards(getAllTodos(), false);
+    highlightOnSelect(allTodos.querySelector(".list-btn"));
     cardsContainer.dataset.displayType = "all";
   } else {
     return;
@@ -70,7 +75,7 @@ cardsContainer.addEventListener("click", (e) => {
     if (cardsContainer.dataset.displayType === "group") {
       renderCards(getGroupTodos(todoToDelete.dataset.groupId));
     } else {
-      renderCards(getAllTodos());
+      renderCards(getAllTodos(), false);
     }
   } else if (card) {
     console.log("Show Todo dialog");
@@ -118,6 +123,5 @@ console.log(db);
 renderGroupList(getGroups());
 
 // todo: Add new todo button (UI & handler)
-// todo: Add handler for cards
+// todo: Add handler to expand cards
 // todo: Add handler to change group name heading
-// todo: Update cards container when the current group deleted

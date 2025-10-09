@@ -94,6 +94,26 @@ body {
   transform: translate(-2px, -4px);
 }
 
+#add-new-todo {
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #d3d3d335;
+  transition: background-color 0.2s ease;
+}
+
+#add-new-todo:hover {
+  background-color: #d3d3d350;
+}
+
+#plus-icon {
+  fill: #1b1a55;
+  width: 120px;
+  height: 120px;
+}
+
 .delete-card-btn {
   position: absolute;
   top: 4%;
