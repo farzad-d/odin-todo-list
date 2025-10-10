@@ -33,11 +33,10 @@ function createCardElement(todo) {
   todoCard.appendChild(todoDesc);
 }
 
-const addNewTodo = document.getElementById("add-new-todo");
-function renderCards(todos, showAddTodo = true) {
+function renderCards(todoArr, addNewTodo) {
   cardsContainer.replaceChildren();
-  todos.forEach((todo) => createCardElement(todo));
-  if (showAddTodo) cardsContainer.appendChild(addNewTodo);
+  todoArr.forEach((todo) => createCardElement(todo));
+  addNewTodo && cardsContainer.appendChild(addNewTodo);
 }
 
 export default cardsContainer;

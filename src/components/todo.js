@@ -4,7 +4,7 @@ class ToDo {
   #id = crypto.randomUUID();
   #groupId = "";
 
-  constructor({ title, desc, dueDate, priority, status }) {
+  constructor({ title, desc, dueDate, priority, status = false }) {
     this.title = title;
     this.desc = desc;
     this.dueDate = dueDate;

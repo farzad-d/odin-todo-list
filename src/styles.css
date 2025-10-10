@@ -182,17 +182,20 @@ h1 {
   margin-top: 30px;
 }
 
-#new-group-dialog:open {
+dialog:open {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   background-color: #c6ceff;
   border-radius: 10px;
   border: none;
-  height: 150px;
+  padding: 12px;
+  width: 380px;
+  height: fit-content;
 }
 
-#new-group-dialog::backdrop {
+dialog::backdrop {
   background-color: black;
   opacity: 0.5;
 }
@@ -213,42 +216,71 @@ h1 {
   background-color: #c6c6c6;
 }
 
-#new-group-form {
+form {
   display: flex;
   flex-direction: column;
-  width: 450px;
-  height: 90px;
   align-items: center;
-  gap: 20px;
+  gap: 22px;
 }
 
-#new-group-form input {
+form div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 6px;
+}
+
+input,
+select {
   width: 300px;
-  height: 25px;
   font-size: 1.2rem;
-  border-radius: 6px;
-  margin-left: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  box-shadow: 1px 1px 1px #999999;
+  background-color: white;
 }
 
-#new-group-form label {
+#todo-priority {
+  width: 320px;
+}
+
+label {
   font-size: 1.2rem;
   font-weight: bold;
 }
 
-#create-group-btn {
+#create-group-btn,
+#create-todo-btn {
   width: 160px;
-  height: 38px;
+  height: 40px;
   border: none;
   border-radius: 5px;
   background-color: green;
   font-size: 1.2rem;
   color: white;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
-#create-group-btn:hover {
+#create-group-btn:hover,
+#create-new-todo-btn:hover {
   background-color: #009700;
 }
 
-#create-group-btn:active {
+#create-group-btn:active,
+#create-new-todo-btn:active {
   background-color: #00a400;
+}
+
+textarea {
+  padding: 10px;
+  width: 300px;
+  height: 100px;
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #cccccc;
+  box-shadow: 1px 1px 1px #999999;
+  font-size: 1.2rem;
+  resize: none;
 }
