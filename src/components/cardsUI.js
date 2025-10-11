@@ -22,7 +22,7 @@ function createCardElement(todo) {
   todoCard.appendChild(cardTitle);
 
   const todoDate = document.createElement("p");
-  todoDate.className = "todo-date";
+  todoDate.className = "todo-due-date";
   todoDate.textContent = todo.dueDate;
   todoCard.appendChild(todoDate);
 
@@ -31,6 +31,21 @@ function createCardElement(todo) {
   todoDesc.textContent =
     todo.desc.length > 60 ? todo.desc.slice(0, 60) + "..." : todo.desc;
   todoCard.appendChild(todoDesc);
+
+  const todoStatus = document.createElement("div");
+  todoStatus.className = "todo-status";
+  todoCard.appendChild(todoStatus);
+
+  const todoStatusLabel = document.createElement("label");
+  todoStatusLabel.htmlFor = `todo-status-${todo.id}`;
+  todoStatusLabel.textContent = "Pending";
+  todoStatus.appendChild(todoStatusLabel);
+
+  const todoStatusInput = document.createElement("input");
+  todoStatusInput.type = "checkbox";
+  todoStatusInput.name = "todo-status";
+  todoStatusInput.id = `todo-status-${todo.id}`;
+  todoStatus.appendChild(todoStatusInput);
 }
 
 function renderCards(todoArr, addNewTodo) {

@@ -47,6 +47,7 @@ body {
   justify-content: center;
   background: transparent;
   border: none;
+  padding: 0;
 }
 
 .group {
@@ -57,7 +58,7 @@ body {
 .delete-group-btn {
   position: absolute;
   top: 50%;
-  right: 1%;
+  right: 2%;
   transform: translateY(-50%);
 }
 
@@ -69,6 +70,7 @@ body {
 
 .delete-icon:hover {
   fill: red;
+  cursor: pointer;
 }
 
 .delete-icon:active {
@@ -117,16 +119,21 @@ body {
 .delete-card-btn {
   position: absolute;
   top: 4%;
-  right: 1%;
+  right: 2%;
 }
 
 .todo-title {
-  margin-bottom: 20px;
+  padding: 28px 0 5px 0;
 }
 
-.todo-date,
-.todo.desc {
-  margin: 5px;
+.todo-desc {
+  padding: 10px 0 15px 0;
+}
+
+.todo-title,
+.todo-due-date,
+.todo-desc {
+  margin: 0;
 }
 
 #cards-container {
@@ -230,7 +237,7 @@ form div {
   gap: 6px;
 }
 
-input,
+form input,
 select {
   width: 300px;
   font-size: 1.2rem;
@@ -245,9 +252,31 @@ select {
   width: 320px;
 }
 
-label {
+form label {
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.todo-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+.todo-status > label {
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+
+.todo-status > input {
+  width: 18px;
+  height: 18px;
+  accent-color: springgreen;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 #create-group-btn,

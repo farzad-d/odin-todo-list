@@ -22,12 +22,14 @@ newGroupBtn.addEventListener("click", () => newGroupDialog.showModal());
 const newGroupForm = document.getElementById("new-group-form");
 newGroupForm.addEventListener("submit", (e) => {
   e.preventDefault();
+
   const formData = new FormData(newGroupForm);
   const name = formData.get("group-name");
-  newGroupForm.reset();
-  newGroupDialog.close();
+
   newGroup(name);
   renderGroupList(getGroups());
+  newGroupForm.reset();
+  newGroupDialog.close();
   groupList.lastChild.click();
 });
 
@@ -36,10 +38,27 @@ const addNewTodo = document.getElementById("add-new-todo");
 addNewTodo.addEventListener("click", () => newTodoDialog.showModal());
 
 const newTodoForm = document.getElementById("new-todo-form");
-//* Listener goes here
+newTodoForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(newTodoForm);
+  const title = formData.get("todo-title");
+  const desc = formData.get("todo-desc");
+  const dueDate = formData.get("todo-due-date");
+  const priority = formData.get("todo-priority");
+
+  const currentGroupId = cardsContainer.dataset.activeGroupId;
+  newTodo({ title, desc, dueDate, priority }, currentGroupId);
+  renderCards(getGroupTodos(currentGroupId), addNewTodo);
+  newTodoForm.reset();
+  newTodoDialog.close();
+});
 
 const closeGroupDialogBtn = document.querySelector(".close-group-dialog-btn");
 closeGroupDialogBtn.addEventListener("click", () => newGroupDialog.close());
+
+const closeTodoDialogBtn = document.querySelector(".close-todo-dialog-btn");
+closeTodoDialogBtn.addEventListener("click", () => newTodoDialog.close());
 
 groupList.addEventListener("click", (e) => {
   const deleteGroupBtn = e.target.closest(".delete-group-btn");
@@ -61,11 +80,11 @@ groupList.addEventListener("click", (e) => {
   } else if (group) {
     renderCards(getGroupTodos(group.dataset.id), addNewTodo);
     highlightOnSelect(group.querySelector(".list-btn"));
-    cardsContainer.dataset.displayType = "group";
+    cardsContainer.dataset.activeGroupId = group.dataset.id;
   } else if (allTodos) {
     renderCards(getAllTodos());
     highlightOnSelect(allTodos.querySelector(".list-btn"));
-    cardsContainer.dataset.displayType = "all";
+    cardsContainer.dataset.activeGroupId = "";
   } else {
     return;
   }
@@ -79,11 +98,9 @@ cardsContainer.addEventListener("click", (e) => {
     const todoToDelete = deleteCardBtn.closest(".todo-card");
     deleteTodo(todoToDelete.dataset.id, todoToDelete.dataset.groupId);
 
-    if (cardsContainer.dataset.displayType === "group") {
-      renderCards(getGroupTodos(todoToDelete.dataset.groupId), addNewTodo);
-    } else {
-      renderCards(getAllTodos());
-    }
+    cardsContainer.dataset.activeGroupId
+      ? renderCards(getGroupTodos(todoToDelete.dataset.groupId), addNewTodo)
+      : renderCards(getAllTodos());
   } else if (card) {
     console.log("Show Todo dialog");
   } else {
@@ -129,6 +146,5 @@ console.log(db);
 
 renderGroupList(getGroups());
 
-// todo: Add new todo button (UI & handler)
 // todo: Add handler to expand cards
 // todo: Add handler to change group name heading
