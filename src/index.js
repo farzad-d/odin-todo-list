@@ -8,6 +8,7 @@ import {
   deleteTodo,
   getGroupTodos,
   getAllTodos,
+  statusToggle,
 } from "./components/todo.js";
 import groupList, {
   renderGroupList,
@@ -66,11 +67,10 @@ groupList.addEventListener("click", (e) => {
   const allTodos = e.target.closest("#all-todos");
 
   if (deleteGroupBtn) {
-    const groupToDelete = deleteGroupBtn.closest(".group");
-    const prevSibling = groupToDelete.previousElementSibling;
+    const prevSibling = group.previousElementSibling;
     const prevId = prevSibling?.dataset?.id ?? null;
 
-    deleteGroup(groupToDelete.dataset.id);
+    deleteGroup(group.dataset.id);
     renderGroupList(getGroups());
 
     const buttonToSelect = prevId
@@ -93,19 +93,19 @@ groupList.addEventListener("click", (e) => {
 cardsContainer.addEventListener("click", (e) => {
   const deleteCardBtn = e.target.closest(".delete-card-btn");
   const card = e.target.closest(".todo-card");
+  const status = e.target.closest("input[type='checkbox'], label");
 
   if (deleteCardBtn) {
-    const todoToDelete = deleteCardBtn.closest(".todo-card");
-    deleteTodo(todoToDelete.dataset.id, todoToDelete.dataset.groupId);
-
-    cardsContainer.dataset.activeGroupId
-      ? renderCards(getGroupTodos(todoToDelete.dataset.groupId), addNewTodo)
-      : renderCards(getAllTodos());
+    deleteTodo(card.dataset.id, card.dataset.groupId);
+  } else if (status) {
+    statusToggle(card.dataset.id, card.dataset.groupId);
   } else if (card) {
     console.log("Show Todo dialog");
-  } else {
-    return;
   }
+
+  cardsContainer.dataset.activeGroupId
+    ? renderCards(getGroupTodos(card.dataset.groupId), addNewTodo)
+    : renderCards(getAllTodos());
 });
 
 // TEST SECTION ####################
@@ -122,7 +122,7 @@ const sampleTodo2 = {
   desc: "Check the entry, output, and loader rules for the assets.",
   dueDate: "2023-10-05",
   priority: "Low",
-  status: true,
+  status: false,
 };
 
 const sampleTodo3 = {

@@ -313,3 +313,7 @@ textarea {
   font-size: 1.2rem;
   resize: none;
 }
+
+.done-status {
+  background-color: #a6d2a7;
+}

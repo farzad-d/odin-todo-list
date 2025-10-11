@@ -48,4 +48,10 @@ function getAllTodos() {
   return db.map((group) => group.items).flat();
 }
 
-export { newTodo, deleteTodo, getGroupTodos, getAllTodos };
+function statusToggle(targetTodoId, targetGroupId) {
+  const targetGroup = db.find((group) => group.id === targetGroupId);
+  const targetTodo = targetGroup.items.find((item) => item.id === targetTodoId);
+  targetTodo.status ? (targetTodo.status = false) : (targetTodo.status = true);
+}
+
+export { newTodo, deleteTodo, getGroupTodos, getAllTodos, statusToggle };

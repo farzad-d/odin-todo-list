@@ -3,7 +3,7 @@ const cardsContainer = document.getElementById("cards-container");
 
 function createCardElement(todo) {
   const todoCard = document.createElement("div");
-  todoCard.className = "todo-card";
+  todoCard.classList.add("todo-card");
   todoCard.dataset.id = todo.id;
   todoCard.dataset.groupId = todo.groupId;
   cardsContainer.appendChild(todoCard);
@@ -38,7 +38,6 @@ function createCardElement(todo) {
 
   const todoStatusLabel = document.createElement("label");
   todoStatusLabel.htmlFor = `todo-status-${todo.id}`;
-  todoStatusLabel.textContent = "Pending";
   todoStatus.appendChild(todoStatusLabel);
 
   const todoStatusInput = document.createElement("input");
@@ -46,6 +45,16 @@ function createCardElement(todo) {
   todoStatusInput.name = "todo-status";
   todoStatusInput.id = `todo-status-${todo.id}`;
   todoStatus.appendChild(todoStatusInput);
+
+  if (!todo.status) {
+    todoStatusInput.checked = false;
+    todoStatusLabel.textContent = "Pending";
+    todoCard.classList.remove("done-status");
+  } else {
+    todoStatusInput.checked = true;
+    todoStatusLabel.textContent = "Done";
+    todoCard.classList.add("done-status");
+  }
 }
 
 function renderCards(todoArr, addNewTodo) {
