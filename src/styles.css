@@ -279,8 +279,8 @@ form label {
   border-radius: 4px;
 }
 
-#create-group-btn,
-#create-todo-btn {
+#submit-group-form,
+#submit-todo-form {
   width: 160px;
   height: 40px;
   border: none;
@@ -292,13 +292,13 @@ form label {
   margin-bottom: 15px;
 }
 
-#create-group-btn:hover,
-#create-new-todo-btn:hover {
+#submit-todo-form:hover,
+#submit-group-form:hover {
   background-color: #009700;
 }
 
-#create-group-btn:active,
-#create-new-todo-btn:active {
+#submit-group-form:active,
+#submit-todo-form:active {
   background-color: #00a400;
 }
 

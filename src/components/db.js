@@ -1,6 +1,5 @@
 let db = [
-  // { name: "foo", items: [], id: "222222" },
-  // { name: "bar", items: [], id: "333333" },
+  // { name: "foo", items: [{item},{item}], id: "222222" },
 ];
 
 export default db;

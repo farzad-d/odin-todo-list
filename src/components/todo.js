@@ -33,6 +33,13 @@ function newTodo(todoData, targetGroupId) {
   targetGroup.addItem(todo);
 }
 
+function updateTodo(todoData, todo) {
+  todo.title = todoData.title;
+  todo.desc = todoData.desc;
+  todo.dueDate = todoData.dueDate;
+  todo.priority = todoData.priority;
+}
+
 function deleteTodo(targetTodoId, targetGroupId) {
   const targetGroup = db.find((group) => group.id === targetGroupId);
   if (!targetGroup) return;
@@ -48,10 +55,24 @@ function getAllTodos() {
   return db.map((group) => group.items).flat();
 }
 
-function statusToggle(targetTodoId, targetGroupId) {
-  const targetGroup = db.find((group) => group.id === targetGroupId);
-  const targetTodo = targetGroup.items.find((item) => item.id === targetTodoId);
-  targetTodo.status ? (targetTodo.status = false) : (targetTodo.status = true);
+function getTodo(targetTodoId) {
+  for (const group of db) {
+    const todo = group.items.find((items) => items.id === targetTodoId);
+    if (todo) return todo;
+  }
+  return null;
 }
 
-export { newTodo, deleteTodo, getGroupTodos, getAllTodos, statusToggle };
+function statusToggle(todo) {
+  todo.status ? (todo.status = false) : (todo.status = true);
+}
+
+export {
+  newTodo,
+  deleteTodo,
+  getGroupTodos,
+  getAllTodos,
+  statusToggle,
+  getTodo,
+  updateTodo,
+};
