@@ -1,4 +1,3 @@
-const groupNameHeading = document.querySelector("h2");
 const cardsContainer = document.getElementById("cards-container");
 
 function createCardElement(todo) {

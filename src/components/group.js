@@ -33,6 +33,11 @@ function deleteGroup(targetGroupId) {
   db.splice(targetGroupIndex, 1);
 }
 
+function getGroupName(targetGroupId) {
+  const targetGroup = db.find((group) => group.id === targetGroupId);
+  return targetGroup.name;
+}
+
 const getGroups = () => db;
 
-export { newGroup, deleteGroup, getGroups };
+export { newGroup, deleteGroup, getGroups, getGroupName };

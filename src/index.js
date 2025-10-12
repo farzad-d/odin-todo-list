@@ -1,8 +1,15 @@
 import "normalize.css";
 import "./styles.css";
 import db from "./components/db.js";
+import cardsContainer, { renderCards } from "./components/cardsUI.js";
 
-import { newGroup, deleteGroup, getGroups } from "./components/group.js";
+import {
+  newGroup,
+  deleteGroup,
+  getGroups,
+  getGroupName,
+} from "./components/group.js";
+
 import {
   newTodo,
   deleteTodo,
@@ -12,11 +19,11 @@ import {
   getTodo,
   updateTodo,
 } from "./components/todo.js";
+
 import groupList, {
   renderGroupList,
   highlightOnSelect,
 } from "./components/sidebarUI.js";
-import cardsContainer, { renderCards } from "./components/cardsUI.js";
 
 const newGroupDialog = document.getElementById("new-group-dialog");
 const newGroupBtn = document.querySelector(".new-group");
@@ -98,6 +105,7 @@ groupList.addEventListener("click", (e) => {
   const deleteGroupBtn = e.target.closest(".delete-group-btn");
   const group = e.target.closest(".group");
   const allTodos = e.target.closest("#all-todos");
+  const groupNameHeading = document.querySelector("h2");
 
   if (deleteGroupBtn) {
     const prevSibling = group.previousElementSibling;
@@ -114,10 +122,12 @@ groupList.addEventListener("click", (e) => {
     renderCards(getGroupTodos(group.dataset.id), addNewTodo);
     highlightOnSelect(group.querySelector(".list-btn"));
     cardsContainer.dataset.activeGroupId = group.dataset.id;
+    groupNameHeading.textContent = getGroupName(group.dataset.id);
   } else if (allTodos) {
     renderCards(getAllTodos());
     highlightOnSelect(allTodos.querySelector(".list-btn"));
     cardsContainer.dataset.activeGroupId = "";
+    groupNameHeading.textContent = "All Todos";
   }
 });
 
@@ -183,5 +193,4 @@ console.log(db);
 
 renderGroupList(getGroups());
 
-// todo: Add handler to change group name heading
 // todo: Add a default group selection at start
