@@ -55,6 +55,16 @@ function createCardElement(todo) {
     todoStatusLabel.textContent = "Done";
     todoCard.classList.add("done-status");
   }
+
+  todoCard.classList.remove("high-priority", "low-priority");
+  switch (todo.priority) {
+    case "low":
+      todoCard.classList.add("low-priority");
+      break;
+    case "high":
+      todoCard.classList.add("high-priority");
+      break;
+  }
 }
 
 function renderCards(todoArr, addNewTodo) {

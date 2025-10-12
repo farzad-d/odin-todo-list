@@ -314,6 +314,14 @@ textarea {
   resize: none;
 }
 
+.low-priority {
+  background-color: #94b6d8;
+}
+
+.high-priority {
+  background-color: #ccb892;
+}
+
 .done-status {
   background-color: #a6d2a7;
 }

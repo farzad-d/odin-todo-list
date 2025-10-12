@@ -184,4 +184,4 @@ console.log(db);
 renderGroupList(getGroups());
 
 // todo: Add handler to change group name heading
-// todo: Add handler to change cards color for each priority
+// todo: Add a default group selection at start
