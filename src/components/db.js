@@ -1,5 +1,3 @@
-let db = [
-  // { name: "foo", items: [{item},{item}], id: "222222" },
-];
+let db = [];
 
 export default db;

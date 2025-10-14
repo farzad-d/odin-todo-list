@@ -155,42 +155,49 @@ cardsContainer.addEventListener("click", (e) => {
   }
 });
 
+newGroup("Default");
+
 // TEST SECTION ####################
-const sampleTodo1 = {
-  title: "Test 1",
-  desc: "Check the entry, output, and loader rules for the assets word word word word.",
-  dueDate: "2025-10-05",
-  priority: "High",
-  status: false,
-};
+const sampleTodos = [
+  {
+    title: "Buy groceries",
+    desc: "Get milk, eggs, bread, and coffee from the store.",
+    dueDate: "2025-10-12",
+    priority: "normal",
+    status: false,
+  },
+  {
+    title: "Call dentist",
+    desc: "Schedule an appointment for next week’s check-up.",
+    dueDate: "2025-10-14",
+    priority: "low",
+    status: true,
+  },
+  {
+    title: "Clean workspace",
+    desc: "Organize desk, cables, and documents.",
+    dueDate: "2025-10-13",
+    priority: "high",
+    status: false,
+  },
+  {
+    title: "Read a book",
+    desc: "Finish the last two chapters of the current novel.",
+    dueDate: "2025-10-18",
+    priority: "low",
+    status: false,
+  },
+  {
+    title: "Exercise",
+    desc: "Do a 30-minute workout or go for a run.",
+    dueDate: "2025-10-11",
+    priority: "high",
+    status: true,
+  },
+];
 
-const sampleTodo2 = {
-  title: "Test 2",
-  desc: "Check the entry, output, and loader rules for the assets.",
-  dueDate: "2023-10-05",
-  priority: "Low",
-  status: false,
-};
-
-const sampleTodo3 = {
-  title: "Test 3",
-  desc: "Check the entry, output, and loader rules for the assets.",
-  dueDate: "2022-10-05",
-  priority: "Low",
-  status: true,
-};
-
-newGroup("group foo");
-newGroup("group bar");
-newGroup("group buz");
-
-newTodo(sampleTodo1, db[0].id);
-newTodo(sampleTodo2, db[1].id);
-newTodo(sampleTodo3, db[1].id);
-
-console.log(db);
+sampleTodos.forEach((sampleTodo) => newTodo(sampleTodo, db[0].id));
 // #################################
 
 renderGroupList(getGroups());
-
-// todo: Add a default group selection at start
+groupList.querySelector("li:nth-child(2)").click();
