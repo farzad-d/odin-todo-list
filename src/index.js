@@ -162,7 +162,7 @@ const sampleTodos = [
   {
     title: "Buy groceries",
     desc: "Get milk, eggs, bread, and coffee from the store.",
-    dueDate: "2025-10-12",
+    dueDate: "2028-10-12",
     priority: "normal",
     status: false,
   },
@@ -176,14 +176,14 @@ const sampleTodos = [
   {
     title: "Clean workspace",
     desc: "Organize desk, cables, and documents.",
-    dueDate: "2025-10-13",
+    dueDate: "2029-10-13",
     priority: "high",
     status: false,
   },
   {
     title: "Read a book",
     desc: "Finish the last two chapters of the current novel.",
-    dueDate: "2025-10-18",
+    dueDate: "2024-10-18",
     priority: "low",
     status: false,
   },

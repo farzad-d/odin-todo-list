@@ -1,6 +1,6 @@
 import db from "./db.js";
 
-class ToDo {
+class Todo {
   #id = crypto.randomUUID();
   #groupId = "";
 
@@ -28,7 +28,7 @@ class ToDo {
 function newTodo(todoData, targetGroupId) {
   const targetGroup = db.find((group) => group.id === targetGroupId);
   if (!targetGroup) return;
-  const todo = new ToDo(todoData);
+  const todo = new Todo(todoData);
   todo.groupId = targetGroupId;
   targetGroup.addItem(todo);
 }

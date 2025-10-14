@@ -1,3 +1,5 @@
+import { formatDistanceToNow, parseISO, isPast } from "date-fns";
+
 const cardsContainer = document.getElementById("cards-container");
 
 function createCardElement(todo) {
@@ -20,10 +22,13 @@ function createCardElement(todo) {
   cardTitle.textContent = todo.title;
   todoCard.appendChild(cardTitle);
 
-  const todoDate = document.createElement("p");
-  todoDate.className = "todo-due-date";
-  todoDate.textContent = todo.dueDate;
-  todoCard.appendChild(todoDate);
+  const todoDueDate = document.createElement("p");
+  todoDueDate.className = "todo-due-date";
+  const due = parseISO(todo.dueDate);
+  todoDueDate.textContent = `Due ${formatDistanceToNow(due, {
+    addSuffix: true,
+  })}`;
+  todoCard.appendChild(todoDueDate);
 
   const todoDesc = document.createElement("p");
   todoDesc.className = "todo-desc";
@@ -48,12 +53,15 @@ function createCardElement(todo) {
   if (!todo.status) {
     todoStatusInput.checked = false;
     todoStatusLabel.textContent = "Pending";
-    todoCard.classList.remove("done-status");
+    todoCard.classList.remove("is-done");
   } else {
     todoStatusInput.checked = true;
     todoStatusLabel.textContent = "Done";
-    todoCard.classList.add("done-status");
+    todoCard.classList.add("is-done");
   }
+
+  if (isPast(due) && !todoCard.classList.contains("is-done"))
+    todoDueDate.classList.add("overdue");
 
   todoCard.classList.remove("high-priority", "low-priority");
   switch (todo.priority) {
