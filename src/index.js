@@ -2,24 +2,16 @@ import "normalize.css";
 import "./styles.css";
 import db from "./components/db.js";
 import cardsContainer, { renderCards } from "./components/cardsUI.js";
-
-import {
-  newGroup,
-  deleteGroup,
-  getGroups,
-  getGroupName,
-} from "./components/group.js";
-
+import { newGroup, deleteGroup, getGroupName } from "./components/group.js";
 import {
   newTodo,
   deleteTodo,
   getGroupTodos,
   getAllTodos,
-  statusToggle,
+  toggleStatus,
   getTodo,
   updateTodo,
 } from "./components/todo.js";
-
 import groupList, {
   renderGroupList,
   highlightOnSelect,
@@ -37,7 +29,7 @@ newGroupForm.addEventListener("submit", (e) => {
   const name = formData.get("group-name");
 
   newGroup(name);
-  renderGroupList(getGroups());
+  renderGroupList(db.get());
   newGroupForm.reset();
   newGroupDialog.close();
   groupList.lastChild.click();
@@ -112,7 +104,7 @@ groupList.addEventListener("click", (e) => {
     const prevId = prevSibling?.dataset?.id ?? null;
 
     deleteGroup(group.dataset.id);
-    renderGroupList(getGroups());
+    renderGroupList(db.get());
 
     const buttonToSelect = prevId
       ? document.querySelector(`[data-id="${prevId}"]`)
@@ -146,7 +138,7 @@ cardsContainer.addEventListener("click", (e) => {
     deleteTodo(card.dataset.id, card.dataset.groupId);
     renderCurrentView(card.dataset.groupId);
   } else if (status) {
-    statusToggle(getTodo(card.dataset.id));
+    toggleStatus(getTodo(card.dataset.id));
     renderCurrentView(card.dataset.groupId);
   } else if (card) {
     openEditDialog(getTodo(card.dataset.id));
@@ -155,14 +147,14 @@ cardsContainer.addEventListener("click", (e) => {
   }
 });
 
-newGroup("Default");
+db.load();
 
-// TEST SECTION ####################
+// SAMPLES #########################
 const sampleTodos = [
   {
     title: "Buy groceries",
     desc: "Get milk, eggs, bread, and coffee from the store.",
-    dueDate: "2028-10-12",
+    dueDate: "2025-10-07",
     priority: "normal",
     status: false,
   },
@@ -196,8 +188,11 @@ const sampleTodos = [
   },
 ];
 
-sampleTodos.forEach((sampleTodo) => newTodo(sampleTodo, db[0].id));
+if (db.get().length === 0) {
+  newGroup("Default");
+  sampleTodos.forEach((sampleTodo) => newTodo(sampleTodo, db.get()[0].id));
+}
 // #################################
 
-renderGroupList(getGroups());
-groupList.querySelector("li:nth-child(2)").click();
+renderGroupList(db.get());
+groupList.querySelector("li:nth-child(1)").click();

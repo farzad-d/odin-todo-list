@@ -19,18 +19,36 @@ class Todo {
   get groupId() {
     return this.#groupId;
   }
-
   set groupId(gId) {
     this.#groupId = gId;
+  }
+
+  toJSON() {
+    return {
+      id: this.#id,
+      groupId: this.#groupId,
+      title: this.title,
+      desc: this.desc,
+      dueDate: this.dueDate,
+      priority: this.priority,
+      status: this.status,
+    };
+  }
+
+  static fromJSON(todoData) {
+    const todo = new Todo(todoData);
+    todo.groupId = todoData.groupId;
+    return todo;
   }
 }
 
 function newTodo(todoData, targetGroupId) {
-  const targetGroup = db.find((group) => group.id === targetGroupId);
+  const targetGroup = db.get().find((group) => group.id === targetGroupId);
   if (!targetGroup) return;
   const todo = new Todo(todoData);
   todo.groupId = targetGroupId;
-  targetGroup.addItem(todo);
+  targetGroup.addTodo(todo);
+  db.save();
 }
 
 function updateTodo(todoData, todo) {
@@ -38,41 +56,48 @@ function updateTodo(todoData, todo) {
   todo.desc = todoData.desc;
   todo.dueDate = todoData.dueDate;
   todo.priority = todoData.priority;
+  db.save();
 }
 
 function deleteTodo(targetTodoId, targetGroupId) {
-  const targetGroup = db.find((group) => group.id === targetGroupId);
+  const targetGroup = db.get().find((group) => group.id === targetGroupId);
   if (!targetGroup) return;
-  targetGroup.removeItem(targetTodoId);
+  targetGroup.removeTodo(targetTodoId);
+  db.save();
 }
 
 function getGroupTodos(targetGroupId) {
-  const targetGroup = db.find((group) => group.id === targetGroupId);
-  return targetGroup.items;
+  const targetGroup = db.get().find((group) => group.id === targetGroupId);
+  return targetGroup.todos;
 }
 
 function getAllTodos() {
-  return db.map((group) => group.items).flat();
+  return db
+    .get()
+    .map((group) => group.todos)
+    .flat();
 }
 
 function getTodo(targetTodoId) {
-  for (const group of db) {
-    const todo = group.items.find((items) => items.id === targetTodoId);
+  for (const group of db.get()) {
+    const todo = group.todos.find((todo) => todo.id === targetTodoId);
     if (todo) return todo;
   }
   return null;
 }
 
-function statusToggle(todo) {
+function toggleStatus(todo) {
   todo.status ? (todo.status = false) : (todo.status = true);
+  db.save();
 }
 
+export default Todo;
 export {
   newTodo,
   deleteTodo,
   getGroupTodos,
   getAllTodos,
-  statusToggle,
+  toggleStatus,
   getTodo,
   updateTodo,
 };
