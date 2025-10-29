@@ -2,4 +2,4 @@
 
 This is an exercise project for The Odin Project.
 
-[Live Preview](https://farzad-d.github.io/todo-list/)
+[Live Preview](https://farzad-d.github.io/odin-todo-list/)
